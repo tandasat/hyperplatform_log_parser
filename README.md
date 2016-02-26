@@ -30,13 +30,12 @@ Output
 
 All logs are printed out to STDIO. There is an example of outout with symbol
 information:
-    ----
+    
     08:47:07.276     4:    0 executed fffffa800194a468, will return to fffff80002ad8c1c nt!KiRetireDpcList+0x1bc
     08:47:07.276     4:    0 executed fffffa8003d46007, will return to fffffa800194a4ad
     08:47:07.276     4:    0 executed fffffa8003d47580, will return to fffffa8003d460b0
     08:47:07.291     4:   64 executed fffffa8003d4ae1c, will return to fffff80002ad7b69 nt!ExpWorkerThread+0x111
     08:45:07.265     4:   64 executed fffffa8002626629, will return to                4
-    ----
 
 
 Supported Platforms
