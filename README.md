@@ -3,7 +3,6 @@ hyperplaform_log_parser
 
 Introduction
 -------------
-
 hyperplaform_log_parser is a user-mode program parsing logs created by
 HyperPlatform. hyperplaform_log_parser monitors updates in a log file and parses
 log lines if any new entries are added. Also, hyperplaform_log_parser is able to
@@ -14,7 +13,6 @@ Currently, hyperplaform_log_parser supports logs from MemoryMon.
 
 Installation and Uninstallation
 --------------------------------
-
 Run hyperplaform_log_parser.exe with a path to a log file. For example,
 
     > hyperplaform_log_parser.exe C:\Windows\MemoryMon.log
@@ -27,7 +25,6 @@ folder as hyperplaform_log_parser.exe.
 
 Output
 -------
-
 All logs are printed out to STDIO. There is an example of outout with symbol
 information:
     
