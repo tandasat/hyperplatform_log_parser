@@ -1,0 +1,57 @@
+// Copyright (c) 2015-2016, tandasat. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file.
+
+//
+// This module implements a SymbolResolver class.
+//
+
+#ifndef HYPERPLATFORM_LOG_PARSER_LOG_PARSER_H_
+#define HYPERPLATFORM_LOG_PARSER_LOG_PARSER_H_
+
+#include <string>
+#include <memory>
+#include "log_line_parser.h"
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// macro utilities
+//
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// constants and macros
+//
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// types
+//
+
+class LogParser {
+ public:
+  explicit LogParser(const std::basic_string<TCHAR>& log_path);
+  bool ParseFile();
+
+ private:
+  LogLineParser log_line_parser_;
+  std::basic_string<TCHAR> log_path_;
+  std::streampos old_position_;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// prototypes
+//
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// variables
+//
+
+////////////////////////////////////////////////////////////////////////////////
+//
+// implementations
+//
+
+#endif  // HYPERPLATFORM_LOG_PARSER_LOG_PARSER_H_
