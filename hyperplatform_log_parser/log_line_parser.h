@@ -34,6 +34,7 @@ class LogLineParser {
 
  private:
   bool TryParseExecutionLog();
+  bool TryParseRweLog();
 
   DriverSymbolResolver driver_symbol_resolver_;
   std::string time_;

@@ -63,6 +63,9 @@ bool LogLineParser::Parse(const std::string &log_line) {
   if (TryParseExecutionLog()) {
     return true;
   }
+  if (TryParseRweLog()) {
+    return true;
+  }
   return false;
 }
 
@@ -93,5 +96,35 @@ bool LogLineParser::TryParseExecutionLog() {
                                     "llx %S\n";
   printf(format_string.c_str(), time_.c_str(), pid_, tid_, executed_address,
          return_address, symbol.c_str());
+  return true;
+}
+
+// Attempts to parse a line reported by MemoryMonRWE
+bool LogLineParser::TryParseRweLog() {
+  // clang-format off
+  std::regex regex(
+    "[SR]= ([[:xdigit:]]{" + pointer_size_ + "}) "
+       "\\(([[:xdigit:]]{" + pointer_size_ + "})\\), "
+     "[D]= ([[:xdigit:]]{" + pointer_size_ + "}) "
+       "\\(([[:xdigit:]]{" + pointer_size_ + "})\\), "
+    "T= [RWE]");
+  // clang-format on
+
+  std::smatch match;
+  if (!std::regex_match(message_, match, regex)) {
+    return false;
+  }
+
+  // Successfully parsed. Print it to STDIO
+  const auto s_address = std::stoull(match[1].str(), nullptr, 16);
+  const auto s_base = std::stoull(match[2].str(), nullptr, 16);
+  const auto d_address = std::stoull(match[3].str(), nullptr, 16);
+  const auto d_base = std::stoull(match[4].str(), nullptr, 16);
+  const auto s_symbol = driver_symbol_resolver_.GetName(s_address, s_base);
+  const auto d_symbol = driver_symbol_resolver_.GetName(d_address, d_base);
+
+  const std::string format_string = "%s %5u:%5u S= %-30S, D= %-30S\n";
+  printf(format_string.c_str(), time_.c_str(), pid_, tid_, s_symbol.c_str(),
+         d_symbol.c_str());
   return true;
 }
