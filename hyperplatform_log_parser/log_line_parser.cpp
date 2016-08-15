@@ -123,7 +123,7 @@ bool LogLineParser::TryParseRweLog() {
   const auto s_symbol = driver_symbol_resolver_.GetName(s_address, s_base);
   const auto d_symbol = driver_symbol_resolver_.GetName(d_address, d_base);
 
-  const std::string format_string = "%s %5u:%5u S= %-30S, D= %-30S\n";
+  const std::string format_string = "%s %5u:%5u S= %-50S, D= %-50S\n";
   printf(format_string.c_str(), time_.c_str(), pid_, tid_, s_symbol.c_str(),
          d_symbol.c_str());
   return true;
